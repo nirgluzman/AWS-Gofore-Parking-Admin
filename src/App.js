@@ -1,15 +1,19 @@
-import Navbar from "./components/Navbar";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
-import ConfirmEmail from "./components/ConfirmEmail";
+import {
+  Navbar,
+  SignIn,
+  SignUp,
+  ConfirmEmail,
+  ParkingData,
+} from "./components";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Signin />
-      <Signup />
+      <SignIn />
+      <SignUp />
       <ConfirmEmail />
+      <ParkingData />
     </>
   );
 }

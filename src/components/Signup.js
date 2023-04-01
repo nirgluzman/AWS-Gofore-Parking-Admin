@@ -8,7 +8,7 @@ import {
   Container,
 } from "@mui/material";
 
-export default function SignUp() {
+export function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -30,10 +30,11 @@ export default function SignUp() {
           alignItems: "center",
         }}
       >
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <TextField
             margin="normal"
             fullWidth
+            required
             label="Username"
             name="username"
             type="text"
@@ -42,6 +43,7 @@ export default function SignUp() {
           <TextField
             margin="normal"
             fullWidth
+            required
             label="Email Address"
             name="email"
             type="email"
@@ -49,9 +51,11 @@ export default function SignUp() {
           <TextField
             margin="normal"
             fullWidth
+            required
             name="password"
             label="Password"
             type="password"
+            helperText="Password must be at least 8 characters long."
           />
           <Button
             type="submit"

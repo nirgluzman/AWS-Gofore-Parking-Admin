@@ -7,7 +7,7 @@ import {
   Container,
 } from "@mui/material";
 
-export default function ConfirmEmail() {
+export function ConfirmEmail() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -30,12 +30,18 @@ export default function ConfirmEmail() {
         <Typography variant="h6" fontWeight="normal">
           Please enter the verification code sent to your email:
         </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{ mt: 3, width: "100%" }}
+        >
           <TextField
             margin="normal"
             fullWidth
+            required
             name="code"
             label="Verification Code"
+            type="text"
             autoFocus
           />
           <Button

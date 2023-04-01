@@ -8,7 +8,7 @@ import {
   Container,
 } from "@mui/material";
 
-export default function SignIn() {
+export function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -29,10 +29,11 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <TextField
             margin="normal"
             fullWidth
+            required
             name="username"
             label="Username"
             autoFocus
@@ -40,6 +41,7 @@ export default function SignIn() {
           <TextField
             margin="normal"
             fullWidth
+            required
             name="password"
             label="Password"
             type="password"

@@ -1,7 +1,7 @@
 import { Box, Typography, AppBar, Toolbar, IconButton } from "@mui/material";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 
-function Navbar() {
+export function Navbar() {
   return (
     <>
       <AppBar position="static">
@@ -32,5 +32,3 @@ function Navbar() {
     </>
   );
 }
-
-export default Navbar;
