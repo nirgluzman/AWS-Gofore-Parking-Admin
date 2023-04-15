@@ -4,5 +4,6 @@
 export { Navbar } from "./Navbar";
 export { SignUp } from "./SignUp";
 export { SignIn } from "./SignIn";
-export { ConfirmEmail } from "./ConfirmEmail";
+export { SignUpConfirm } from "./SignUpConfirm";
 export { ParkingData } from "./ParkingData";
+export { ProtectedRoute } from "./ProtectedRoute";

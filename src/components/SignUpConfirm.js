@@ -1,24 +1,55 @@
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+import { UserAuth } from "../context/AuthContext";
+
 import {
-  CssBaseline,
   Button,
   TextField,
   Typography,
   Box,
   Container,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 
-export function ConfirmEmail() {
-  const handleSubmit = (event) => {
+export function SignUpConfirm() {
+  const [error, setError] = useState("");
+
+  const navigate = useNavigate();
+  const { username } = useParams(); // Get username from URL
+
+  const { confirmUser } = UserAuth();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setError("");
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      code: data.get("code"),
-    });
+
+    try {
+      const result = await confirmUser(username, data.get("code"));
+      console.log("confirming the new created user:", result);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
+      {error && (
+        <Alert
+          variant="filled"
+          severity="error"
+          onClose={() => {
+            setError("");
+          }}
+        >
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      )}
       <Box
         sx={{
           marginTop: 8,
