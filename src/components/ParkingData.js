@@ -1,4 +1,6 @@
-import axios from "axios";
+import { useState } from "react";
+
+import { UserAuth } from "../context/AuthContext";
 
 import {
   Box,
@@ -9,26 +11,63 @@ import {
   TableHead,
   TableRow,
   Paper,
+  IconButton,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 
 import SyncIcon from "@mui/icons-material/Sync";
 
-function createData(parkingSpot, vrn, startTime) {
-  return { parkingSpot, vrn, startTime };
-}
-
-const rows = [
-  createData(1, "11-222-33", "12:00"),
-  createData(2, "44-555-11", "05:00"),
-  createData(3, "", ""),
-  createData(4, "", ""),
-  createData(5, "88-999-00", "12:00"),
-];
+import axios from "axios";
 
 export function ParkingData() {
+  const [parkingData, setParkingData] = useState([]);
+  const [error, setError] = useState("");
+
+  const { isAuthenticated } = UserAuth();
+
+  const handleGetData = async () => {
+    setError("");
+
+    try {
+      const { idToken } = await isAuthenticated();
+
+      const result = await axios.get(process.env.REACT_APP_API_URL, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: idToken,
+        },
+      });
+
+      if (result.data.length === 0) {
+        throw new Error("An error occurred, please try again!");
+      }
+
+      setParkingData(result.data);
+    } catch (err) {
+      setError(err.message);
+      console.log(err.message);
+    }
+  };
+
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
-      <SyncIcon fontSize="large" />
+      {error && (
+        <Alert
+          variant="filled"
+          severity="error"
+          onClose={() => {
+            setError("");
+          }}
+        >
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      )}
+      <IconButton onClick={handleGetData} aria-label="refresh" size="large">
+        <SyncIcon fontSize="inherit" />
+      </IconButton>
+
       <TableContainer
         component={Paper}
         sx={{
@@ -49,7 +88,7 @@ export function ParkingData() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {parkingData.map((row) => (
               <TableRow
                 key={row.parkingSpot}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
