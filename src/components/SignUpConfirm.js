@@ -13,7 +13,7 @@ import {
   AlertTitle,
 } from "@mui/material";
 
-export function SignUpConfirm() {
+export function SignupConfirm() {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();

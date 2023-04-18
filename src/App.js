@@ -4,9 +4,9 @@ import { CssBaseline } from "@mui/material"; // to kickstart an elegant, consist
 
 import {
   Navbar,
-  SignIn,
-  SignUp,
-  SignUpConfirm,
+  Signin,
+  Signup,
+  SignupConfirm,
   ParkingData,
   ProtectedRoute,
 } from "./components";
@@ -17,9 +17,9 @@ function App() {
       <CssBaseline />
       <Navbar />
       <Routes>
-        <Route path="/" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signup-confirm/:username" element={<SignUpConfirm />} />
+        <Route path="/" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup-confirm/:username" element={<SignupConfirm />} />
         <Route
           path="/parking-data"
           element={

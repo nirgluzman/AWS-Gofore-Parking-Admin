@@ -14,7 +14,7 @@ import {
   AlertTitle,
 } from "@mui/material";
 
-export function SignIn() {
+export function Signin() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { loginUser } = UserAuth();

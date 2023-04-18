@@ -2,8 +2,8 @@
 // This makes named components and other functions easier to import from other directories.
 
 export { Navbar } from "./Navbar";
-export { SignUp } from "./SignUp";
-export { SignIn } from "./SignIn";
-export { SignUpConfirm } from "./SignUpConfirm";
+export { Signup } from "./Signup";
+export { Signin } from "./Signin";
+export { SignupConfirm } from "./SignupConfirm";
 export { ParkingData } from "./ParkingData";
 export { ProtectedRoute } from "./ProtectedRoute";
