@@ -8,6 +8,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import { AuthContextProvider } from "./context/AuthContext";
+import { ParkContextProvider } from "./context/ParkContext";
 
 import App from "./App";
 
@@ -15,7 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <AuthContextProvider>
-      <App />
+      <ParkContextProvider>
+        <App />
+      </ParkContextProvider>
     </AuthContextProvider>
   </BrowserRouter>
 );

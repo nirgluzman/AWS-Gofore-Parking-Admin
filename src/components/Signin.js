@@ -42,7 +42,6 @@ export function SignIn() {
     <Container component="main" maxWidth="xs">
       {error && (
         <Alert
-          variant="filled"
           severity="error"
           onClose={() => {
             setError("");

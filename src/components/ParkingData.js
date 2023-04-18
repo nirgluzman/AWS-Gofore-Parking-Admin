@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-
-import { UserAuth } from "../context/AuthContext";
-
 import {
   Box,
   Table,
@@ -11,56 +7,19 @@ import {
   TableHead,
   TableRow,
   Paper,
-  IconButton,
   Alert,
   AlertTitle,
 } from "@mui/material";
 
-import SyncIcon from "@mui/icons-material/Sync";
-
-import axios from "axios";
+import { Park } from "../context/ParkContext";
 
 export function ParkingData() {
-  const [parkingData, setParkingData] = useState([]);
-  const [error, setError] = useState("");
-
-  const { isAuthenticated } = UserAuth();
-
-  const handleGetData = async () => {
-    setError("");
-
-    try {
-      const { idToken } = await isAuthenticated();
-
-      const result = await axios.get(process.env.REACT_APP_API_URL, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: idToken,
-        },
-      });
-
-      console.log(result);
-
-      if (result.data.length === 0) {
-        throw new Error("An error occurred, please try again!");
-      }
-
-      setParkingData(result.data);
-    } catch (err) {
-      setError(err.message);
-      console.log(err.message);
-    }
-  };
-
-  useEffect(() => {
-    handleGetData();
-  }, []);
+  const { error, setError, parkingData } = Park();
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       {error && (
         <Alert
-          variant="filled"
           severity="error"
           onClose={() => {
             setError("");
@@ -70,9 +29,6 @@ export function ParkingData() {
           {error}
         </Alert>
       )}
-      <IconButton onClick={handleGetData} aria-label="refresh" size="large">
-        <SyncIcon fontSize="inherit" />
-      </IconButton>
 
       <TableContainer
         component={Paper}

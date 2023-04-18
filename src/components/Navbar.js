@@ -57,7 +57,6 @@ export function Navbar() {
       </AppBar>
       {error && (
         <Alert
-          variant="filled"
           severity="error"
           onClose={() => {
             setError("");
