@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { UserAuth } from "../context/AuthContext";
 
@@ -39,6 +39,8 @@ export function ParkingData() {
         },
       });
 
+      console.log(result);
+
       if (result.data.length === 0) {
         throw new Error("An error occurred, please try again!");
       }
@@ -49,6 +51,10 @@ export function ParkingData() {
       console.log(err.message);
     }
   };
+
+  useEffect(() => {
+    handleGetData();
+  }, []);
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
