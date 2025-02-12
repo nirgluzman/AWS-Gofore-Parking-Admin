@@ -1,37 +1,35 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
 
-import axios from "axios";
+import axios from 'axios';
 
-import { UserAuth } from "../context/AuthContext";
+import { UserAuth } from '../context/AuthContext';
 
 const ParkContext = createContext();
 
 export const ParkContextProvider = ({ children }) => {
   const [parkingData, setParkingData] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const { isAuthenticated } = UserAuth();
 
   const fetchParkData = async () => {
-    setError("");
+    setError('');
 
     try {
       const { idToken } = await isAuthenticated();
-      const result = await axios.get(process.env.REACT_APP_API_URL, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: idToken,
-        },
-      });
-
-      if (result.data.length === 0) {
-        throw new Error("An error occurred, please try again!");
-      }
+      const result = (
+        await axios.get(process.env.REACT_APP_API_URL, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: idToken,
+          },
+        })
+      ).data;
 
       setParkingData(result.data);
     } catch (err) {
-      setError(err.message);
       console.log(err);
+      setError(err.response.data.message);
     }
   };
 
@@ -41,9 +39,7 @@ export const ParkContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <ParkContext.Provider value={{ error, setError, parkingData }}>
-      {children}
-    </ParkContext.Provider>
+    <ParkContext.Provider value={{ error, setError, parkingData }}>{children}</ParkContext.Provider>
   );
 };
 
